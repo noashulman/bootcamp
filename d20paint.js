@@ -151,7 +151,7 @@ function purple() {
 function pencilDraw() {
 
          color = color;
-         if (color == "white"){
+         if(color = "white"){
              color = "black"
          }
         width = "5px"
@@ -174,8 +174,8 @@ function pencilDraw() {
 // function brushDraw() {
   
 //         color = color;
-//         width = "20px"
-//         height = '20px'
+//         width = "5px"
+//         height = '5px'
     
 
 //     var divs = document.querySelectorAll(".pixel")
@@ -205,44 +205,18 @@ function clean() {
 
 //1 get the x y coordiantes from the eventlistener
 //2 take those x y cooridantes and give it to your pixel top
-line.addEventListener ("click",liner)
+line.addEventListener ("click",lineTrue)
+elem.addEventListener ("mousedown", getXY)
+// elem.addEventListener ("mouseup", getXY2)
 
 
 
+let ifLine = false
 
-
-var mouse = {
-    position : {x:0, y:0},
-    down : false,
-    downedPos :{x:0, y:0},
-    upedPos :{x:0, y:0},
+function lineTrue (event){
+    ifLine = true;
+    
 }
-mouse.getPosition = function(element, evt) {
-    var rect = element.getBoundingClientRect(), 
-    root = document.documentElement;
-
-    this.position.x = evt.clientX - rect.left - root.scrollLeft;
-    this.position.y = evt.clientY - rect.top - root.scrollTop;
-    return this.position;
-}
-
-elem.addEventListener('mousedown', function(e){
-    mouse.down = true;
-    mouse.downedPos = mouse.getPosition(this, e);
-});
-
-elem.addEventListener('mousemove', function(e){
-    ms = mouse.getPosition(this, e);
-    if(mouse.down){
-        mouse.upedPos = ms;
-    }
-});
-
-elem.addEventListener('mouseup', function(e){
-    mouse.down = false;
-});
-
-function liner (){
 
 function linedraw(ax,ay,bx,by){
    if (ifLine==true){
@@ -260,37 +234,33 @@ function linedraw(ax,ay,bx,by){
     var length=Math.sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));
     elem.innerHTML += "<div id='line' style='height:" + length + "px;width:5px;background-color:" + color+ ";position:absolute;top:" + (ay) + "px;left:" + (ax) + "px;transform:rotate(" + calc + "deg);-ms-transform:rotate(" + calc + "deg);transform-origin:0% 0%;-moz-transform:rotate(" + calc + "deg);-moz-transform-origin:0% 0%;-webkit-transform:rotate(" + calc  + "deg);-webkit-transform-origin:0% 0%;-o-transform:rotate(" + calc + "deg);-o-transform-origin:0% 0%;'></div>"
     ifLine = false;
-
-    linedraw(mouse.downedPos.x, mouse.downedPos.y, mouse.upedPos.x, mouse.upedPos.y)
 }
-
-
-
-}
-
-}
-
       
-// }function getXY (event){
-//     if (ifLine == true){
-//     var rect = event.target.getBoundingClientRect();
+}function getXY (event){
+    if (ifLine == true){
+    var rect = event.target.getBoundingClientRect();
     
-//     var x = event.clientX - rect.left;     // Get the horizontal coordinate
-//     var y = event.clientY - rect.top;     // Get the vertical coordinate
+    var x = event.clientX - rect.left;     // Get the horizontal coordinate
+    var y = event.clientY - rect.top;     // Get the vertical coordinate
     
-//     elem.addEventListener ("mouseup", getXY2)
-//     function getXY2 (event){
-//         var rect = event.target.getBoundingClientRect();
+    elem.addEventListener ("mouseup", getXY2)
+    function getXY2 (event){
+        var rect = event.target.getBoundingClientRect();
         
-//         var x2 = event.clientX - rect.left;     // Get the horizontal coordinate
-//         var y2 = event.clientY - rect.top;     // Get the vertical coordinate
-//             console.log (x,y,x2,y2)
-//             linedraw (x,y,x2,y2);
+        var x2 = event.clientX - rect.left;     // Get the horizontal coordinate
+        var y2 = event.clientY - rect.top;     // Get the vertical coordinate
+
+            linedraw (x,y,x2,y2);
 
 
 
-//         }
-//     }
+        }
+    }
 
-// }
+}
+
     
+
+    
+    
+
